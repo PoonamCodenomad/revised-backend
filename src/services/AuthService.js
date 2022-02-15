@@ -59,6 +59,7 @@ class AuthService {
     });
     let result=[]
     allUsers.map((user,index)=>{
+      result[index]={}
       result[index] = user
       let chat = [...user.receivedDms,...user.sentDms]
       
