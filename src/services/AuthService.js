@@ -40,7 +40,7 @@ class AuthService {
         exclude: ["password"],
       },
       include: [
-        { model: models.dms,
+        { model: dms,
             required: true, // redundant
             as: 'Filter',
             where: {[Op.or]: [{ senderId: id }, { receiverId: id }]},
