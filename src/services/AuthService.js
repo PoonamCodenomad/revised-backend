@@ -40,12 +40,25 @@ class AuthService {
         exclude: ["password"],
       },
       include: [
-       
-         {
-           model: dms,
+        { 
+          model: dms, as: 'receivedDms', 
+          required: false,
+           where: {
+               receiverId: id 
+            }
+        },
+        {
+           model: dms, as: 'sentDms', 
            required: false,
             where: {
-             [Op.and]: [{ senderId: id }, { receiverId: id }],
+             senderId: id 
+           }
+         },
+         {
+           model: dms,   as: 'chat', 
+           required: true,
+            where: {
+             [Op.or]: [{ senderId: id }, { receiverId: id }],
            },
            order: [["createdAt", "ASC"]],
 
