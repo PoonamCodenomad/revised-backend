@@ -8,6 +8,7 @@ module.exports = (sequelize, DataTypes) => {
   users.associate = ({ dms }) =>  {
     users.hasMany(dms, { foreignKey: 'receiverId', targetKey: 'id', as: 'sentDms' });
     users.hasMany(dms, { foreignKey: 'senderId', targetKey: 'id', as: 'receivedDms' });
+    users.hasMany(dms, { foreignKey: 'senderId',foreignKey: 'receiverId', targetKey: 'id', as: 'chat' });
   };
   return users;
 };

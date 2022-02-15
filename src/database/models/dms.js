@@ -21,6 +21,7 @@ module.exports = (sequelize, DataTypes) => {
   dms.associate = ({ users })  => {
     dms.belongsTo(users, { foreignKey: 'receiverId', targetKey: 'id', as: 'sentDms' });
     dms.belongsTo(users, { foreignKey: 'senderId', targetKey: 'id', as: 'receivedDms' });
+    dms.belongsTo(users, { foreignKey: 'senderId',foreignKey: 'receiverId', targetKey: 'id', as: 'chat' });
   };
   return dms;
 };
