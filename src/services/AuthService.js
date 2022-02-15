@@ -55,10 +55,10 @@ class AuthService {
            }
          },
          {
-           model: dms, as: 'chat', 
-           required: false,
+           model: dms,  
+           required: true,
             where: {
-             [Op.or]: [{ senderId: id }, { receiverId: id }],
+             [Op.and]: [{ senderId: id }, { receiverId: id }],
            },
            order: [["createdAt", "ASC"]],
            limit : 10
