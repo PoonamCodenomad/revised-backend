@@ -61,8 +61,9 @@ class AuthService {
     allUsers.map((user,index)=>{
       result[index] = user
       let chat = [...user.receivedDms,...user.sentDms]
-      console.log(chat)
+      
       for (var i = 1; i < chat.length; i++) {
+        console.log(chat[i],"msg")
         if (new Date(chat[i - 1].createdAt) < new Date(chat[i].createdAt)) {
           //done = false;
           var tmp = chat[i - 1];
