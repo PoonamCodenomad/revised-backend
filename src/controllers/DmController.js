@@ -13,6 +13,7 @@ class DmController {
    * @returns {object} function to create new dm
    */
   static async createDm(req, res) {
+
     const newDM = await DmService.createNewDm(req);
     Response.successMessage(
       res,
@@ -21,6 +22,40 @@ class DmController {
       httpStatus.CREATED
     );
   }
+  
+
+    /**
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} function to create update dm
+   */
+    static async updateDm(req, res) {
+      console.log('asas');
+      const newDM = await DmService.updateDm(req);
+      Response.successMessage(
+        res,
+        "DM updated successfully!",
+        newDM,
+        httpStatus.CREATED
+      );
+    }
+
+
+        /**
+   * @param {object} req
+   * @param {object} res
+   * @returns {object} function to create update dm
+   */
+    static async updateAllDm(req, res) {
+      const newDM = await DmService.updateALlDm(req);
+      Response.successMessage(
+        res,
+        "DM updated successfully!",
+        newDM,
+        httpStatus.CREATED
+      );
+    }
+
 }
 
 export default DmController;

@@ -3,7 +3,7 @@ import Validator from "../../middlewares/Validator";
 import DmController from "../../controllers/DmController";
 import verifyToken from "../../middlewares/verifyToken";
 
-const authRouter = express.Router();
+const dmRoutes = express.Router();
 
 /**
  * @swagger
@@ -46,7 +46,7 @@ const authRouter = express.Router();
  *         description: DM created successfully!
  */
 
-authRouter.post(
+ dmRoutes.post(
   "/",
   Validator.dmRules(),
   Validator.validateInput,
@@ -54,4 +54,93 @@ authRouter.post(
   DmController.createDm
 );
 
-export default authRouter;
+
+/**
+ * @swagger
+ *
+ * /api/v1/dms/read:
+ *   post:
+ *     security: []
+ *     summary: Mark a DM read
+ *     description: Users should be able to update dm to read
+ *     tags:
+ *       - DMs
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               dmId:
+ *                 type: string
+ *     parameters:
+ *        - name: x-auth-token
+ *          in : header
+ *          description: authorization header
+ *          required: true
+ *          type: string
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               dmId:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: DM updated successfully!
+ */
+
+ dmRoutes.post(
+  "/read",
+  Validator.validateInput,
+  verifyToken,
+  DmController.updateDm
+);
+
+
+
+/**
+ * @swagger
+ *
+ * /api/v1/dms/readAll:
+ *   post:
+ *     security: []
+ *     summary: Mark a DM read
+ *     description: Users should be able to update dm to read
+ *     tags:
+ *       - DMs
+ *     requestBody:
+ *       content:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               recieverId:
+ *                 type: string
+ *     parameters:
+ *        - name: x-auth-token
+ *          in : header
+ *          description: authorization header
+ *          required: true
+ *          type: string
+ *     produces:
+ *         application/json:
+ *           schema:
+ *             type: object
+ *             properties:
+ *               recieverId:
+ *                 type: string
+ *     responses:
+ *       201:
+ *         description: DM updated successfully!
+ */
+
+ dmRoutes.post(
+  "/readAll",
+  Validator.validateInput,
+  verifyToken,
+  DmController.updateAllDm
+);
+
+export default dmRoutes;
