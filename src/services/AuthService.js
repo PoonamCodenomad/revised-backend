@@ -55,7 +55,7 @@ class AuthService {
            }
          },
          {
-           model: dms,  
+           model: dms,   as: 'chat', 
            required: true,
             where: {
              [Op.and]: [{ senderId: id }, { receiverId: id }],
