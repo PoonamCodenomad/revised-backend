@@ -73,7 +73,7 @@ class AuthService {
         }
 
       }
-      console.log(chat,"chat")
+      console.log(result[index],"chat")
       result[index]['sentDms']=chat
     })
 
