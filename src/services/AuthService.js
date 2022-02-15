@@ -40,12 +40,32 @@ class AuthService {
         exclude: ["password"],
       },
       include: [
-        { model: dms,as :"chat",
-            required: true, // redundant
-            as: 'Filter',
-            where: {[Op.or]: [{ senderId: id }, { receiverId: id }]},
-        }
-      ],
+        { 
+          model: dms, as: 'receivedDms', 
+          required: false,
+           where: {
+               receiverId: id 
+            }
+        },
+        {
+           model: dms, as: 'sentDms', 
+           required: false,
+            where: {
+             senderId: id 
+           }
+         },
+         {
+           model: dms,   as: 'chat', 
+           required: true,
+            where: {
+             [Op.or]: [{ receiverId: id }],
+           },
+           order: [["createdAt", "ASC"]],
+
+         }
+     
+  
+],
       order: [["createdAt", "DESC"]]
     });
     return allUsers;
