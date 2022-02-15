@@ -57,7 +57,9 @@ class AuthService {
       ],
       order: [["createdAt", "DESC"]]
     });
+    let users=[]
     allUsers.map((user,index)=>{
+      users[index] = user
       let chat = [...user.receivedDms,...user.sentDms]
       console.log(chat)
       for (var i = 1; i < chat.length; i++) {
@@ -69,7 +71,7 @@ class AuthService {
         }
 
       }
-      allUsers[index]['chat']=chat
+      users[index]['chat']=chat
     })
 
     return allUsers;
