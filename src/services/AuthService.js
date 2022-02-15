@@ -58,7 +58,8 @@ class AuthService {
       order: [["createdAt", "DESC"]]
     });
     allUsers.map((user,index)=>{
-      let chat = [...user.receivedDms,user.sentDms]
+      let chat = [...user.receivedDms,...user.sentDms]
+      console.log(chat)
       for (var i = 1; i < chat.length; i++) {
         if (new Date(chat[i - 1].createdAt) < new Date(chat[i].createdAt)) {
           //done = false;
