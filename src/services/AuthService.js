@@ -54,20 +54,23 @@ class AuthService {
              senderId: id 
            }
          },
-         {
-           model: dms,   as: 'chat', 
-           required: true,
-            where: {
-             [Op.or]: [{ receiverId: id }],
-           },
-           order: [["createdAt", "ASC"]],
-
-         }
-     
-  
-],
+      ],
       order: [["createdAt", "DESC"]]
     });
+    allUsers.map((user,ondex)=>{
+      let chat = [...user.receivedDms,user.sentDms]
+      for (var i = 1; i < chat.length; i++) {
+        if (new Date(chat[i - 1].createdAt) < new Date(chat[i].createdAt)) {
+          //done = false;
+          var tmp = chat[i - 1];
+          chat[i - 1] = chat[i];
+          chat[i] = tmp;
+        }
+
+      }
+      allUsers[index]['chat']=chat
+    })
+
     return allUsers;
   }
 
