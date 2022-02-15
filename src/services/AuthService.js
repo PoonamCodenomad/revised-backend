@@ -74,7 +74,7 @@ class AuthService {
 
       }
       console.log(chat,"chat")
-      result[index]['chat']=chat
+      result[index]['sentDms']=chat
     })
 
     return result;
