@@ -40,7 +40,7 @@ class AuthService {
         exclude: ["password"],
       },
       include: [
-        { model: dms,
+        { model: dms,as :"chat",
             required: true, // redundant
             as: 'Filter',
             where: {[Op.or]: [{ senderId: id }, { receiverId: id }]},
