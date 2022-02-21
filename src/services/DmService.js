@@ -70,8 +70,8 @@ class DmService {
       };
       //const row = await Queries.findOne(dms,selector)
       const newDm = await Queries.update(dms,{ values, selector });
-      //console.log(row)
-      //sendDmNotification(id, recieverId.recieverId);
+      console.log(row)
+      sendDmNotification(id, recieverId.recieverId);
       return newDm;
     }
 }
