@@ -1,7 +1,7 @@
 import { v4 as uuid } from "uuid";
 import { dms } from "../database/models";
 import Queries from "./Queries";
-import { sendDmNotification } from '../helpers/socketIoSetup';
+import { sendDmNotification,sendDmReadNotification } from '../helpers/socketIoSetup';
 
 class DmService {
   /**
