@@ -66,11 +66,11 @@ class DmService {
       let date = new Date()
       let values = { readAt:date };
       let selector = {
-          where: { receiverId: recieverId.recieverId,senderId:id },
+          where: { receiverId: id,senderId:recieverId.recieverId },
       };
       //const row = await Queries.findOne(dms,selector)
       const newDm = await Queries.update(dms,{ values, selector });
-      //console.log(row)
+      console.log(newDm)
       sendDmReadNotification(id, recieverId.recieverId);
       return newDm;
     }
