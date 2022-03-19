@@ -5,6 +5,24 @@ import AuthController from "../../controllers/AuthController";
 import DataChecker from "../../middlewares/DataChecker";
 import inputError from "../../middlewares/inputError";
 import verifyToken from "../../middlewares/verifyToken";
+import Response from "../../helpers/Response";
+import httpStatus from "http-status";
+
+const path = require('path');
+
+const multer = require('multer')
+
+const Storage = multer.diskStorage({
+  
+  destination(req, file, callback) {
+    callback(null, path.join(__dirname, '/images'));
+  },
+  filename(req, file, callback) {
+    let name = `${file.fieldname}_${Date.now()}_${file.originalname.replace(/ /g,"")}`
+    callback(null, `${name}`);
+
+  },
+});
 
 const authRouter = express.Router();
 
@@ -95,6 +113,52 @@ authRouter.post(
   DataChecker.validateCredentials,
   AuthController.login
 );
+
+
+
+
+
+ authRouter.post(
+  "/uploadFile",
+  AuthController.uploadFile
+);
+
+authRouter.post('/fileUpload' , (req , res) => {
+  //const fileRecievedFromClient = req.file; //File Object sent in 'fileFieldName' field in multipart/form-data
+
+    let upload = multer({storage: Storage}).single('picture');
+    upload(req, res, function (err) {
+
+      if (!req.file) {
+        return res.send('Please select an image to upload');
+      } else if (err instanceof multer.MulterError) {
+        return res.send(err);
+      } else if (err) {
+        return res.send(err);
+      }
+      // Display uploaded image for user validation
+      return Response.successMessage(
+        res,
+        "uploaded successfully",
+        req.file.path,
+        httpStatus.OK
+      ); // send uploaded image
+    });
+
+  //let form = new FormData();
+  //form.append('fileFieldName', fileRecievedFromClient.buffer, fileRecievedFromClient.originalname);
+
+  // axios.post('http://server2url/fileUploadToServer2', form, {
+  //         headers: {
+  //             'Content-Type': `multipart/form-data; boundary=${form._boundary}`
+  //         }
+  //     }).then((responseFromServer2) => {
+  //         res.send("SUCCESS")
+  //     }).catch((err) => {
+  //         res.send("ERROR") 
+  //     })
+})
+
 
 /**
  * @swagger
