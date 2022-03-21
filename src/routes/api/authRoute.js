@@ -23,6 +23,7 @@ const Storage = multer.diskStorage({
 
   },
 });
+const upload = multer({storage: Storage}).single('picture');
 
 const authRouter = express.Router();
 
@@ -124,7 +125,7 @@ authRouter.post(
 );
 
 authRouter.post('/fileUpload' , (req , res) => {
-    let upload = multer({storage: Storage}).single('picture');
+    
     upload(req, res, function (err) {
 
       if (!req.file) {
