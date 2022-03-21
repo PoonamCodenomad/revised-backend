@@ -124,7 +124,7 @@ authRouter.post(
   AuthController.uploadFile
 );
 
-authRouter.post('/fileUpload' , (req , res) => {
+authRouter.post('/fileUpload' ,multer({storage: Storage}).single('picture'), (req , res) => {
     
     upload(req, res, function (err) {
 
