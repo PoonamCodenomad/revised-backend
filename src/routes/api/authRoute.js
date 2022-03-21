@@ -15,7 +15,7 @@ const multer = require('multer')
 const Storage = multer.diskStorage({
   
   destination(req, file, callback) {
-    callback(null, path.join(__dirname, '/images'));
+    callback(null, 'public');
   },
   filename(req, file, callback) {
     let name = `${file.fieldname}_${Date.now()}_${file.originalname.replace(/ /g,"")}`
