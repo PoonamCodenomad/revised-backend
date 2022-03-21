@@ -124,8 +124,6 @@ authRouter.post(
 );
 
 authRouter.post('/fileUpload' , (req , res) => {
-  //const fileRecievedFromClient = req.file; //File Object sent in 'fileFieldName' field in multipart/form-data
-
     let upload = multer({storage: Storage}).single('picture');
     upload(req, res, function (err) {
 
@@ -145,18 +143,7 @@ authRouter.post('/fileUpload' , (req , res) => {
       ); // send uploaded image
     });
 
-  //let form = new FormData();
-  //form.append('fileFieldName', fileRecievedFromClient.buffer, fileRecievedFromClient.originalname);
 
-  // axios.post('http://server2url/fileUploadToServer2', form, {
-  //         headers: {
-  //             'Content-Type': `multipart/form-data; boundary=${form._boundary}`
-  //         }
-  //     }).then((responseFromServer2) => {
-  //         res.send("SUCCESS")
-  //     }).catch((err) => {
-  //         res.send("ERROR") 
-  //     })
 })
 
 
