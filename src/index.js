@@ -10,10 +10,10 @@ const app = express();
 //app.use(bodyParser.urlencoded({ extended: true }));
 //app.use(bodyParser.text());
 app.use(cors())
-app.use(bodyParser.json())
-//app.use(bodyParser.json({limit:'50mb',extended:true,type: 'application/json'}))
+//app.use(bodyParser.json())
+app.use(bodyParser.json({limit:'50mb',extended:true,type: 'application/json'}))
 app.use('/', router);
-//app.use('/static', express.static('public'))
+app.use('/static', express.static('public'))
 
 
 app.get('/', (req, res) =>
