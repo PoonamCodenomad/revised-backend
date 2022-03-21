@@ -12,7 +12,7 @@ const app = express();
 app.use(cors())
 app.use(bodyParser.json())
 //app.use(bodyParser.json({limit:'50mb',extended:true,type: 'application/json'}))
-app.use('/static', express.static('src/routes/api/images'))
+app.use('/static', express.static('var/www/revised-backend/src/routes/api/images'))
 app.use('/', router);
 
 app.get('/', (req, res) =>
