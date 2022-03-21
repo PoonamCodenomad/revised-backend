@@ -139,7 +139,7 @@ authRouter.post('/fileUpload' ,multer({storage: Storage}).single('picture'), (re
       return Response.successMessage(
         res,
         "uploaded successfully",
-        req.file.path,
+        req.file.path.replace("public","static"),
         httpStatus.OK
       ); // send uploaded image
     });
